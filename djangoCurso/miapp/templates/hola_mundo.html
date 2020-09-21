@@ -1,0 +1,12 @@
+{% extends 'layout.html' %}
+
+{% block title  %}
+Index
+{% endblock %}
+
+{% block content %}
+<!--Variable para hacer uso de los datos del padre-->
+<!-- heredar como si fuera una clase con el .super-->
+{{block.super}}
+<h1>hola mundo</h1>
+{% endblock %}

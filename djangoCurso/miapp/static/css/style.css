@@ -1,0 +1,144 @@
+/*Estilos generales*/
+* {
+  margin: 0px;
+  padding: 0px;
+  font-family: Arial, Helvetica, sans-serif;
+  text-decoration: none;
+}
+
+body {
+  background: #f2f2f2;
+}
+
+.box p, .box h2, .box h3, .box ul{
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+.box ul,  .box ol{
+  margin-left: 20px;
+  margin-bottom: 10px;
+  list-style: none;
+}
+/**/
+
+header {
+  width: 100vw;
+  height: 140px;
+  background: #23282b;
+}
+
+#logo {
+  width: 60%;
+  height: 130px;
+  padding-top: 10px;
+  margin: 0 auto;
+}
+
+#logo img {
+  display: block;
+  width: 60px;
+  float: left;
+  margin-top: 20px;
+}
+
+#logo h1 {
+  display: block;
+  float: left;
+  letter-spacing: 2px;
+  font-weight: 100;
+  color: #2ba977;
+  margin-top: 40px;
+  margin-left: 20px;
+}
+
+/*nav */
+nav {
+  width: 100vw;
+  background: #1b1e1f;
+  border: 1px solid #333;
+  height: 40px;
+  box-sizing: border-box;
+  font-size: 13px;
+}
+
+nav ul {
+  list-style: none;
+  text-decoration: none;
+}
+nav ul li {
+  line-height: 40px;
+  float: left;
+}
+
+nav ul li a {
+  display: block;
+  padding: 0 10px;
+  color: #d1d4d6;
+  transition: all 350ms;
+}
+
+nav ul li a:hover {
+  background: #2ba977;
+  color: #fff;
+  box-shadow: 0px 0px 3px #444 inset;
+  transition: all 350ms;
+}
+
+.barra {
+  width: 100vw;
+  margin: auto 0;
+  margin-bottom: 140px;
+}
+
+.esquina-izq {
+  display: block;
+  border-left: 20px solid transparent;
+  border-top: 10px solid #2b2f30;
+  float: left;
+}
+
+.esquina-der {
+  display: block;
+  border-right: 20px solid transparent;
+  border-top: 10px solid #2b2f30;
+  float: right;
+}
+
+/**/
+#content {
+  width: 90vw;
+  margin: 0 auto;
+  min-height: 930px;
+  margin-bottom: 30px;
+  margin-top: 30px;
+}
+
+.box {
+  background: #fff;
+  width: 90%;
+  min-height: 100%;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 2px;
+  margin: 0 auto;
+}
+
+.title{
+    color: #444;
+    letter-spacing: 1px;
+    font-size: 2em;
+    margin-bottom: 0.5em;
+    margin-top: 0.3em;
+}
+
+footer{
+    width: 100vw;
+    background: #1b1e1f;
+    border: 1px solid #333;
+    box-sizing: border-box;
+    color: #fff;
+    text-align: center;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}

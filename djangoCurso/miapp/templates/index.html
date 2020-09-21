@@ -1,0 +1,46 @@
+{% extends 'layout.html' %} 
+{% block title %} 
+{{title}} 
+{% endblock %}  
+{% comment 'Esto es un comentario django' %}
+<!--Todo lo de adentro es un comentario-->
+para ver las variables se interpola con el <!--{{}}-->>
+{% endcomment %}
+
+{% block content %}
+<h1>{{title}}</h1>
+{{mi_variable}}
+
+{% if nombre and nombre == 'lodo' %}
+    <p>Mi nombre es {{nombre}}</p>
+{% else %}
+    <p><strong>El nombre no existe o no es el mismo</strong></p>
+{% endif %}
+
+<h3> listado de lenguajes de programacion:</h3>
+<ul>
+{% for lenguaje in lenguajes %}
+{% comment %}
+el forloop.first ayuda a ver si es el primer elemento de la lista
+el forloop.last ayuda a ver si es el ultimo elemento de la lista
+el forloop.counter ayuda a ver el numero del elemento
+    forloop.counter0 contador desde cero
+    forloop.revcouter contado inverso
+    forloop.revcouter0 contado inverso empesando desde cero
+{% endcomment %}
+ 
+     <li>{{forloop.counter0}}-{{lenguaje}}</li>
+    {% empty %}
+     <p>No hay lenguajes que mostrar</p>
+{% endfor %}
+</ul>
+<p>Años hasts 2050:</p>
+<ul>
+   {% for year in years %}
+        <li> {{ year }} </li>
+        {% if year % 2 == 0 %}
+            <p>Es un año par</p>
+        {% endif %}
+   {% endfor %} 
+<ul>
+{% endblock %}
