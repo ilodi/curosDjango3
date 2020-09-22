@@ -6,7 +6,58 @@ Pagina test
 {% endblock %}
 
 {% block content %}
-<h1  class="title">Pagina</h1>
-<h1>Pagina</h1>
+  <h1 class="title">Pagina</h1>
+  <p>{{'Creado para el filtro de quitar espacios'|cut:" "}}</p>
+  <p>{{'Creado para el filtro de quitar espacios ñ'|cut:"ñ"}}</p>
 
-{% endblock %} 
+  <!--Texto por defecto-->
+  {{texto|default:'no hay nada por defecto'}}
+  <!--De una lista el primer valor-->
+  <p>
+    {{lista|first}}
+  </p>
+
+  <!--De una lista el ultimo valor-->
+  <p>
+    {{lista|last}}
+  </p>
+
+  <!--mostrar lista formateada-->
+  <p>
+    {{lista|join:', '}}
+  </p>
+
+  <!--mostrar tamaño total de l lista-->
+  <p>
+    {{lista|length}}
+  </p>
+
+  <!--mostrar texto mayusculas-->
+  <p>
+    {{"texto mayusculas"|upper}}
+  </p>
+
+  <!--mostrar texto minusculas-->
+  <p>
+    {{"texto MINUSCULAS"|lower}}
+  </p>
+
+  <!--sacar elemento aleatorio de una linsta -->
+  <p>
+    {{lista|random}}
+  </p>
+
+  <!--quitar html y quede limpio -->
+  <p>
+    {{"<h1>Para quitar </h1> y <p>limpiar html</p>"|striptags}}
+  </p>
+
+  <!--se pueden convinar -->
+  <p>
+    {{"<h1>Para quitar </h1> y <p>limpiar html</p>"|striptags|wordcount}}
+  </p>
+<!--Cargar los filtros propios-->
+<!--El filtro safe interpreta el codigo HTML-->
+{% load  filters %}
+  {{"lodi en el filtro"|saludo|safe}}
+{% endblock %}

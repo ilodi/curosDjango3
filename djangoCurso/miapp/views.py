@@ -43,7 +43,7 @@ def index(request):
     year = 2021
     hasta = range(year, 2051)
     nombre = "lodo"
-    #lista
+    # lista
     lenguajes = ['js', 'python', 'c']
     # para pasar informacion es el 3 parametro y esta es en formato diccionario
     return render(request, 'index.html', {
@@ -63,7 +63,10 @@ def pagina(request, redirigir=0):
     if redirigir == 1:
         return redirect('contacto', nombre="Eduardo", apellidos="diaz")
 
-    return render(request, 'pagina.html')
+    return render(request, 'pagina.html', {
+        'text': '',
+        'lista': ['uno', 'dos', 'tres']
+    })
 
 
 def contacto(request, nombre="", apellidos=""):

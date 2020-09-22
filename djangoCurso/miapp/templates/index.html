@@ -11,6 +11,8 @@ para ver las variables se interpola con el <!--{{}}-->>
 <h1>{{title}}</h1>
 {{mi_variable}}
 
+ {% include  'fecha_actual.html' with saludo="Hola mundo local | no hay only" %}
+<!--que no herede el inlude y solo use lo que se le manda por aqui only-->
 {% if nombre and nombre == 'lodo' %}
     <p>Mi nombre es {{nombre}}</p>
 {% else %}
@@ -34,13 +36,5 @@ el forloop.counter ayuda a ver el numero del elemento
      <p>No hay lenguajes que mostrar</p>
 {% endfor %}
 </ul>
-<p>Años hasts 2050:</p>
-<ul>
-   {% for year in years %}
-        <li> {{ year }} </li>
-        {% if year % 2 == 0 %}
-            <p>Es un año par</p>
-        {% endif %}
-   {% endfor %} 
-<ul>
+
 {% endblock %}

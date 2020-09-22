@@ -1,55 +1,54 @@
 <!DOCTYPE html>
 <html lang="es">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %} {% endblock %} | Curso Django </title>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{% block title %} {% endblock %} | Curso Django</title>
     <!--Importat Css-->
     <!-- Cargar archivos estaticos-->
     {% load static %}
-    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}" />
-</head>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{% static 'css/style.css' %}"
+    />
+  </head>
 
-<body>
-
+  <body>
     <header>
-        <div id="logo">
-            <img src="{% static 'images/logo.png' %} " alt="logo" />
-            <h1>Sitio con django</h1>
-        </div>
-
+      <div id="logo">
+        <img src="{% static 'images/logo.png' %} " alt="logo" />
+        <h1>Sitio con django</h1>
+      </div>
     </header>
 
     <nav>
-        <ul>
-            <li>
-                <a href="/">Inicio</a>
-            </li>
-            <li>
-                <a href="/hola-mundo">Hola mundo</a>
-            </li>
-            <li>
-                <a href="/pagina">Pagina prueba</a>
-            </li>
-            <li>
-                <a href="/contacto">Contacto</a>
-            </li>
-        </ul>
+      <ul>
+        <li>
+          <a href="{% url 'index' %}">Inicio</a>
+        </li>
+        <li>
+          <a href="{% url 'pagina' %}">Hola mundo</a>
+        </li>
+        <li>
+          <a href="{% url 'hola_mundo' %}">Pagina prueba</a>
+        </li>
+        <li>
+          <a href="{% url 'contacto' 'Nombre' 'lopez' %}">Contacto</a>
+        </li>
+      </ul>
     </nav>
 
+   
 
     <div id="content">
-        <div class="box">
-            {% block content %}
-            <!-- Codigo que viene de templates -->
-            <strong>contenido padre</strong>
-            {% endblock %}
-        </div>
+      <div class="box">
+        {% block content %}
+        <!-- Codigo que viene de templates -->
+        <strong>contenido padre</strong>
+        {% endblock %}
+      </div>
     </div>
-    <footer>
-        Master Python &copy;
-    </footer>
-</body>
-
+    <footer>Master Python &copy; lodo || {% now "Y-m-d" %} </footer>
+  </body>
 </html>
