@@ -4,9 +4,12 @@
 <br />
 <p>Años hasts 2050:</p>
 <ul>
-  {% for year in years %} {% if year|divisibleby:2 == True %}
+  {% for year in years %} 
+  {% if year|divisibleby:2 == True %}
   <li>{{ year }}</li>
   <p>Es un año par</p>
-  {% endif %} {% endfor %}
+  {% endif %} 
+  {% endfor %}
   <ul></ul>
 </ul>
+
