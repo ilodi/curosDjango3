@@ -1,4 +1,6 @@
 from django.shortcuts import render, HttpResponse, redirect
+# importar modelo para hacer uso de el
+from miapp.models import Article
 
 # MVC = Modelo Vista Controlador
 # Dentro del controlador hay Acciones(metodos)
@@ -74,3 +76,103 @@ def contacto(request, nombre="", apellidos=""):
     if nombre and apellidos:
         html = f"<h3>Nombre completo {nombre} {apellidos}</h3>"
     return HttpResponse(layout + f"<h1>Contacto </h1>"+html)
+
+
+def crear_articulo(request, title, content, public):
+    """
+    1.- importat el modelo
+    2.- paso acontinuacion instanciar la clase
+    """
+    articulo = Article(
+        title=title,
+        content=content,
+        public=public
+    )
+    """
+    3.- Guardar en la base de datos
+    """
+    articulo.save()
+
+    return HttpResponse(f"Articulo creado:{articulo.title} - {articulo.content }")
+
+
+def articulo(request, title):
+    """
+    Hacer una consulta a la base de datos
+    1.- de la instancia del modelo se usa el .objects 
+    Objects ::Accede al modelo -> Accede a su objetos para hacer la consulta
+    como objects trae todo lo de el modelo se usa el .get() para ser mas especifico
+    """
+    """
+    para que el get funcione le puedes mandar un id
+    el cual se consulta con un pk = primary key,
+    de igual manera con cualquier entidad de la base de datos
+    el id es la que todas tienen en comun pero igual esta 
+    todas las que has creado...
+    tambien puedes ser más especifico agregando mas parametros como
+    get(x,y)
+    """
+    # para evitar errores un try y un except
+    try:
+        articulo = Article.objects.get(title=title)
+        response = f"Articulo id:{articulo.id}-{articulo.title}"
+    except:
+        response = "No se encuentra el articulo"
+
+    return HttpResponse(response)
+
+
+def editar_articulo(request, id):
+    """
+    ediart articulo
+    1.- instanciar del modelo para la consulta
+    """
+    articulo = Article.objects.get(pk=id)
+    """
+    2.-Dar valor a sus propiedades
+    """
+    articulo.title = "Feri"
+    articulo.content = "Nueva"
+    articulo.public = True
+    """
+    3.-Guardar valores
+    """
+    articulo.save()
+
+    return HttpResponse(f"Articulo editado id:{articulo.id}-{articulo.title}")
+
+
+def articulos(request):
+    """
+    Traer todos los articulos
+    1.- hacer consulta
+    2.- el metodo .all trae todo
+    all trae todo y order_by ordena por lo que se necesite
+    para ordenar de manera inversa solo agrega - ejemplo
+    .order_by('-name')
+    .order_by('-id)
+    limite de  consula
+    .order_by('id')[:x]
+    limite de sonsulta entre z y y
+    .order_by('id')[x:y]
+    sacar solo un elemento
+    .order_by('id')[0:1]
+
+    """
+    articulos = Article.objects.all()
+    return render(request, 'articulos.html', {
+        'articulos': articulos
+    })
+
+def borrar_articulo(request, id):
+    """
+    borrar articulo
+    1.- hacer consulta
+    """
+    articulo = Article.objects.get(pk=id)
+    """
+    2.- ya que lo tengas con su id se borra
+    """
+    articulo.delete()
+
+    return redirect('articulos')
