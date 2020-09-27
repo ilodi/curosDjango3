@@ -142,7 +142,33 @@ def create_full_article(request):
     1.- importar el formulario
     2.- extender de la clase ejemplo FormArticle()
     """
-    formulario = FormArticle()
+    # comprobar datos por post
+    # si llega generameos una peticion
+    # pero si no llega se manda un form vacio
+    if request.method == 'POST':
+        # se mandaran los datos al form
+        # automaticamnte se mandan los datos limpiando
+        formulario = FormArticle(request.POST)
+        # validar formulario
+        if formulario.is_valid():
+            # recoger datos del formulario limpios
+            data_form = formulario.cleaned_data
+            # se puede acceder con el .get o solo
+            title = data_form.get('title')
+            content = data_form.get('content')
+            public = data_form.get('public')
+            # guardar informacion
+            articulo = Article(
+                title=title,
+                content=content,
+                public=public
+            )
+
+            articulo.save()
+            # return HttpResponse(articulo.title)
+            return redirect('articulos')
+    else:
+        formulario = FormArticle()
     return render(request, 'create_full.html', {
         'form': formulario
     })

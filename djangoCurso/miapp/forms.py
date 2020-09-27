@@ -12,13 +12,13 @@ class FormArticle(forms.Form):
         widget=forms.Textarea
     )
 
-    #agregar input form
+    # agregar input form
     public_option = [
         (0, 'Si'),
         (1, 'No')
     ]
 
-    select = forms.TypedChoiceField(
-        label = "¿Publicado ?",
-        choices = public_option
+    public = forms.TypedChoiceField(
+        label="¿Publicado?",
+        choices=public_option
     )
