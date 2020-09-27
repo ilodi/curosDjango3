@@ -3,6 +3,8 @@ from django.shortcuts import render, HttpResponse, redirect
 from miapp.models import Article
 # agregar OR para consultas
 from django.db.models import Q
+# importar formulario
+from miapp.forms import FormArticle
 
 # MVC = Modelo Vista Controlador
 # Dentro del controlador hay Acciones(metodos)
@@ -112,7 +114,7 @@ def save_article(request):
     """
     if request.method == 'POST':
 
-        #datos por POST
+        # datos por POST
         title = request.POST['title']
         content = request.POST['content']
         public = request.POST['public']
@@ -133,8 +135,18 @@ def save_article(request):
 def create_article(request):
     return render(request, 'create_article.html')
 
+
 def create_full_article(request):
-    return render(request, 'create_full.html')
+    """
+    formularios como le gustan a django
+    1.- importar el formulario
+    2.- extender de la clase ejemplo FormArticle()
+    """
+    formulario = FormArticle()
+    return render(request, 'create_full.html', {
+        'form': formulario
+    })
+
 
 def articulo(request, title):
     """
@@ -253,7 +265,7 @@ def articulos(request):
     """
     articulos = Article.objects.filter(
         Q(title__contains="2") | Q(title__contains="3"))
-    #trae todos
+    # trae todos
     articulos = Article.objects.all().order_by('-id')
     return render(request, 'articulos.html', {
         'articulos': articulos

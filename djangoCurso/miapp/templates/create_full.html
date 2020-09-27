@@ -7,6 +7,16 @@ Create Full
 
 {% block content %}
 
+<form action="" method="POST">
+    {% csrf_token %}
+    
+    {% comment '' %}
+     con el .as_p
+     todos los elementos llamados del formulario se encapsulan en una parrafo
+    {% endcomment %}
+    {{form.as_p}}
 
+    <input type="submit" value="Guardar" />
+</form>
 
 {% endblock %}
