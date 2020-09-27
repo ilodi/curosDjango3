@@ -1,0 +1,27 @@
+<!--Extends es para hacer uso de platillas padre-->
+{% extends 'layout.html' %}
+
+{% block title%}
+Formularios
+{% endblock %}
+
+{% block content %}
+<form action="{% url 'save' %}" method="POST">
+    {% csrf_token %}
+    <label for="title">Titulo</label>
+    <input type="text" name="title" placeholder="Mete tu nombre" />
+
+    <label for="content">Contenido</label>
+    <textarea name="content"></textarea>
+
+    <label for="public">¿Publicado?</label>
+    <select name="public">
+        <option value="1">Si</option>
+        <option value="0">No</option>
+    </select>
+
+    <input type="submit" value="Guardar" />
+</form>
+
+
+{% endblock %}

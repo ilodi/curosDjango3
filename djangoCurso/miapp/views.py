@@ -1,7 +1,7 @@
 from django.shortcuts import render, HttpResponse, redirect
 # importar modelo para hacer uso de el
 from miapp.models import Article
-#agregar OR para consultas
+# agregar OR para consultas
 from django.db.models import Q
 
 # MVC = Modelo Vista Controlador
@@ -97,6 +97,44 @@ def crear_articulo(request, title, content, public):
 
     return HttpResponse(f"Articulo creado:{articulo.title} - {articulo.content }")
 
+
+def save_article(request):
+    # mediante formulario
+    """
+    1.- importat el modelo
+    2.- paso acontinuacion instanciar la clase
+    """
+    """
+    3.- Guardar en la base de datos
+    """
+    """
+    1.- comprobar si llegan datos por get
+    """
+    if request.method == 'POST':
+
+        #datos por POST
+        title = request.POST['title']
+        content = request.POST['content']
+        public = request.POST['public']
+
+        articulo = Article(
+            title=title,
+            content=content,
+            public=public
+        )
+
+        articulo.save()
+        return HttpResponse(f"Articulo creado:{articulo.title} - {articulo.content }")
+
+    else:
+        return HttpResponse('<h2>No se ha podido crear el articulo</h2>')
+
+
+def create_article(request):
+    return render(request, 'create_article.html')
+
+def create_full_article(request):
+    return render(request, 'create_full.html')
 
 def articulo(request, title):
     """
@@ -202,17 +240,21 @@ def articulos(request):
     """
     articulos = Article.objects.filter(title="Articulo").exclude(public=False)
 
-    #Sql crudo
-    articulos = Article.objects.raw("SELECT * FROM miapp_article WHERE title='Artiuclo' AND public=0 ")
-    
-    #caso 4 
+    # Sql crudo
+    articulos = Article.objects.raw(
+        "SELECT * FROM miapp_article WHERE title='Artiuclo' AND public=0 ")
+
+    # caso 4
     """
     agregar OR a las rutas
     1.- importar
     from django.db.models import Q
     2.- usar .filter(Q(X) | Q(Y) )
     """
-    articulos = Article.objects.filter(Q(title__contains="2") | Q(title__contains="3"))
+    articulos = Article.objects.filter(
+        Q(title__contains="2") | Q(title__contains="3"))
+    #trae todos
+    articulos = Article.objects.all().order_by('-id')
     return render(request, 'articulos.html', {
         'articulos': articulos
     })
