@@ -1,20 +1,21 @@
 {% extends 'layout.html' %} 
-{% block title %} 
-Articulos 
-{% endblock %}  
-
+{% block title %} Articulos {% endblock %}
 
 {% block content %}
 
 <ul>
-    {% for articulo in articulos  %}
-      <li>
-       <h4> {{articulo.id}} - {{articulo.title}}</h4>
-        <p>
-          {{articulo.content}}
-        </p>
-        <a href="{% url 'borrar' id=articulo.id %}" >Borrar</a>
-      </li>  
-    {% endfor %}
+  {% for articulo in articulos %}
+  <li>
+    <h4>{{articulo.id}} - {{articulo.title}}</h4>
+    <span>{{articulo.created_at}}</span>
+    {% if articulo.public %}
+      <strong>Articulo Publicado</strong>
+    {% else %}
+      <strong>Articulo no publicado</strong>
+    {% endif %}
+    <p>{{articulo.content}}</p>
+    <a href="{% url 'borrar' id=articulo.id %}">Borrar</a>
+  </li>
+  {% endfor %}
 </ul>
 {% endblock %}

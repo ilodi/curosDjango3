@@ -1,6 +1,8 @@
 from django.shortcuts import render, HttpResponse, redirect
 # importar modelo para hacer uso de el
 from miapp.models import Article
+#agregar OR para consultas
+from django.db.models import Q
 
 # MVC = Modelo Vista Controlador
 # Dentro del controlador hay Acciones(metodos)
@@ -143,6 +145,7 @@ def editar_articulo(request, id):
 
 
 def articulos(request):
+    # caso 1
     """
     Traer todos los articulos
     1.- hacer consulta
@@ -160,9 +163,60 @@ def articulos(request):
 
     """
     articulos = Article.objects.all()
+
+# caso 2
+    """
+    hacer más consultas especificas
+    -- Metodo filter()
+    """
+    """
+    todos los campos tienen un lookup el cual se ejecuta x__lookup
+    ejemplo que el titulo tenga la palabra articulos
+    title__container="articulo"
+    o que sean exactamante un valor
+    title__exact="algo"
+    si necesitas que no importen mayusculas o minusculas usas
+    title_iexact="algo"
+    """
+    """
+    lookup_gt == mas grande que
+    sacar los que tengan un id mayor a 12
+    id__gt=12
+    lookup_gte == mayor o igual que
+    sacar el mayor o igual a 11
+    id__gte=11
+    lookup_lte == menores o igual que
+    sacar el menor o igual a 11
+    id_lte=11
+    por ultimo puedes hacer mas de una filtracion de la siguiente manera
+    """
+    articulos = Article.objects.filter(id__lte=11, title__contains="Articulo")
+
+   # caso 3
+    """
+        obtener articulos que solo esten publicados
+        1.-hacer consulta
+        2.- usar el .filter(public=True)
+        ///es como un segundo filtro para extraer
+        .---Tambien puedes usar filter().exclude()
+    """
+    articulos = Article.objects.filter(title="Articulo").exclude(public=False)
+
+    #Sql crudo
+    articulos = Article.objects.raw("SELECT * FROM miapp_article WHERE title='Artiuclo' AND public=0 ")
+    
+    #caso 4 
+    """
+    agregar OR a las rutas
+    1.- importar
+    from django.db.models import Q
+    2.- usar .filter(Q(X) | Q(Y) )
+    """
+    articulos = Article.objects.filter(Q(title__contains="2") | Q(title__contains="3"))
     return render(request, 'articulos.html', {
         'articulos': articulos
     })
+
 
 def borrar_articulo(request, id):
     """
