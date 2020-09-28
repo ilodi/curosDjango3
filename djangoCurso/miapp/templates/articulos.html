@@ -3,6 +3,17 @@
 
 {% block content %}
 
+{% if messages %}
+  {% for message in messages %}
+    <div class="message">
+     {{message}}
+    </div>
+  {% endfor %}
+{% endif %}
+
+<h2>
+  Listado de articulos
+</h2>
 <ul>
   {% for articulo in articulos %}
   <li>

@@ -5,6 +5,8 @@ from miapp.models import Article
 from django.db.models import Q
 # importar formulario
 from miapp.forms import FormArticle
+#libreria mensajes flash / con el fin de no hacer un redirect
+from django.contrib import messages
 
 # MVC = Modelo Vista Controlador
 # Dentro del controlador hay Acciones(metodos)
@@ -166,6 +168,11 @@ def create_full_article(request):
 
             articulo.save()
             # return HttpResponse(articulo.title)
+            #crear mensaje flash (sesión que solo se muestra una vez)
+            #el primer parametro es la reques para crear la session
+            #el seguno es el mensaje
+            messages.success(request, f'Has creado correctamente el articulo {articulo.title}')
+
             return redirect('articulos')
     else:
         formulario = FormArticle()
