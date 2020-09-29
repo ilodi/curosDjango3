@@ -6,14 +6,26 @@ from django.db import models
 
 
 class Article(models.Model):
-    title = models.CharField(max_length=150)
-    content = models.TextField()
-    image = models.ImageField(default='null')
-    public = models.BooleanField()
+    title = models.CharField(max_length=150, verbose_name="Título")
+    content = models.TextField(verbose_name="Contenido")
+    image = models.ImageField(default='null',verbose_name="Imagen")
+    public = models.BooleanField(verbose_name="¿Publicado?")
     # solo se guarda la primera ves
-    created_at = models.DateTimeField(auto_now_add=True)
+    created_at = models.DateTimeField(auto_now_add=True, verbose_name="Creado")
     # se actualizara siempre
-    updated_at = models.DateTimeField(auto_now=True)
+    updated_at = models.DateTimeField(auto_now=True, verbose_name="Modificado")
+    #clase meta en los modelos ayuda a proporcionar informacion al admin
+    class Meta:
+        verbose_name="Articulo"
+        verbose_name_plural="Articulos"
+        ordering = ['created_at']
+    #methodo magico para que el objeto sea humanisado en el admin
+    def __str__(self):
+        if self.public:
+            publico = "(publicado)"
+        else:
+            publico = "(privado)"
+        return f"{self.title}  {publico}"
 
 
 class Category(models.Model):
@@ -21,6 +33,9 @@ class Category(models.Model):
     description = models.CharField(max_length=250)
     # Guardad fecha de manera manueal
     crated_at = models.DateField()
+    class Meta:
+        verbose_name="Categoría"
+        verbose_name_plural="Categorías"
 
 
 """

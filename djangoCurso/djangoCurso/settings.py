@@ -38,7 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     #my apps
-    'miapp'
+    #cambiar como se ve en el admin
+    'miapp.apps.MiappConfig'
 ]
 
 MIDDLEWARE = [
