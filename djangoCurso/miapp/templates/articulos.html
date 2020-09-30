@@ -1,32 +1,31 @@
 {% extends 'layout.html' %} 
-{% block title %} Articulos {% endblock %}
+{% block title %} Articulos {% endblock %} 
 
-{% block content %}
+{% block content %} {% if messages %} 
 
-{% if messages %}
-  {% for message in messages %}
-    <div class="message">
-     {{message}}
-    </div>
-  {% endfor %}
-{% endif %}
+{% for message in messages %}
+<div class="message">{{message}}</div>
+{% endfor %} {% endif %}
 
-<h2>
-  Listado de articulos
-</h2>
-<ul>
-  {% for articulo in articulos %}
-  <li>
-    <h4>{{articulo.id}} - {{articulo.title}}</h4>
+<h2>Listado de articulos</h2>
+
+{% for articulo in articulos %}
+<article class="article-item">
+  {# Ver si existe y aparte si es mayor o igual a uno la url #} 
+  {% if articulo.image != 'null' and articulo.image.url|length >= 1 %}
+  <div class="image">
+    <img src="{{articulo.image.url}}" />
+  </div>
+  {% endif %}
+  <div class="data">
+    <h2>{{articulo.id}} - {{articulo.title}}</h2>
     <span>{{articulo.created_at}}</span>
-    {% if articulo.public %}
-      <strong>Articulo Publicado</strong>
-    {% else %}
-      <strong>Articulo no publicado</strong>
-    {% endif %}
     <p>{{articulo.content}}</p>
-    <a href="{% url 'borrar' id=articulo.id %}">Borrar</a>
-  </li>
-  {% endfor %}
-</ul>
+    <a class="btn btn-delete" href="{% url 'borrar' id=articulo.id %}">Borrar</a>
+  </div>
+  <div class="clearfix">
+ </div> 
+</article>
+{% endfor %} 
+
 {% endblock %}

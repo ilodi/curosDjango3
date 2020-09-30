@@ -1,7 +1,8 @@
 # Crea formularios conrectamente
 from django import forms
-#Importar libreria de validaciones
+# Importar libreria de validaciones
 from django.core import validators
+
 
 class FormArticle(forms.Form):
     title = forms.CharField(
@@ -16,7 +17,8 @@ class FormArticle(forms.Form):
         ),
         validators=[
             validators.MinLengthValidator(4, 'El titulo es muy corto'),
-            validators.RegexValidator('[A-Za-z0-9ñ ]*$', "El titulo esta mal formado", 'invalid_title')
+            validators.RegexValidator(
+                '[A-Za-z0-9ñ ]*$', "El titulo esta mal formado", 'invalid_title')
         ]
     )
 
@@ -27,7 +29,7 @@ class FormArticle(forms.Form):
             validators.MaxLengthValidator(140, 'Tienes mucho texto')
         ]
     )
-    #segunda forma de modificar los atributos
+    # segunda forma de modificar los atributos
     content.widget.attrs.update({
         'placeholder': 'Mete el contenido',
         'class': 'input-Sty',

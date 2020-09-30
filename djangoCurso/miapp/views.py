@@ -299,7 +299,7 @@ def articulos(request):
     articulos = Article.objects.filter(
         Q(title__contains="2") | Q(title__contains="3"))
     # trae todos
-    articulos = Article.objects.all().order_by('-id')
+    articulos = Article.objects.filter(public=True).order_by('-id')
     return render(request, 'articulos.html', {
         'articulos': articulos
     })
