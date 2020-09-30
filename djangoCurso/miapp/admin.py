@@ -11,3 +11,9 @@ class ArticleAdmin(admin.ModelAdmin):
 
 admin.site.register(Article, ArticleAdmin)
 admin.site.register(Category)
+
+#configurar titulo Admin
+title = "Django Curso | lodi"
+admin.site.site_header = title
+admin.site.site_title = title
+admin.site.index_title = "Panel de gestion"

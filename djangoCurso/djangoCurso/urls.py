@@ -39,3 +39,4 @@ if settings.DEBUG:
 #3.- tomar toda la lista de url y concatena una nueva url
 #primero se para la url y luego el root
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
